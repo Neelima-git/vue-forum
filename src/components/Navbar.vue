@@ -2,7 +2,6 @@
     <nav class="navbar bg-secondary bg-opacity-50">
       <div class="container-fluid">
         <a class="navbar-brand">Forum Posts</a>
-        <form class="d-flex" role="search">
           <input
             class="form-control me-2"
             type="search"
@@ -11,7 +10,6 @@
             v-model.trim="searchQuery"
           />
           <button class="btn btn-outline-danger text-red">Delete</button>
-        </form>
       </div>
     </nav>
   </template>

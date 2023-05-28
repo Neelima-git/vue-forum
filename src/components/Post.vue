@@ -24,7 +24,7 @@
               <a href="#" class="card-link me-2">#{{ tag }}</a>
             </div>
             
-            <input class="form-check-input ms-auto" type="checkbox" :value="post.id" v-model="selectedPosts" />
+            <input class="form-check-input ms-auto" type="checkbox"/>
           </div>
         </div>
       </div>

@@ -29,8 +29,5 @@ export const usePostsStore = defineStore('posts', {
       const response = await result.json()
       this.posts = response.posts
     },
-    deletePosts(postIds) {
-        this.posts = this.posts.filter(post => !postIds.includes(post.id));
-    }
   }
 })
