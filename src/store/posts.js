@@ -19,9 +19,11 @@
 
 import { defineStore } from 'pinia'
 
-export const usePostsStore = defineStore('posts', {
+export const usePostsStore = defineStore('filteredPosts', {
   state: () => ({
-    posts: []
+    posts: [],
+    filteredPosts: [],
+    checked: []
   }),
   actions: {
     async getPosts() {
@@ -29,5 +31,8 @@ export const usePostsStore = defineStore('posts', {
       const response = await result.json()
       this.posts = response.posts
     },
+    deletePosts(postId) {
+      this.filteredPosts = this.filteredPosts.filter((obj) => obj.id !== postId);
+    }  
   }
 })
