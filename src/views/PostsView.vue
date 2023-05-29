@@ -1,11 +1,5 @@
 <template>
   <div>
-    <!-- Navbar -->
-    <div class="navbar">
-      <Navbar />
-    </div>
-
-    <!-- Posts -->
     <Post v-for="post in filteredPosts" :key="post.id" :post="post" />
   </div>
 </template>
@@ -16,7 +10,6 @@ import { storeToRefs } from "pinia";
 
 import { usePostsStore } from "../store/posts";
 
-import Navbar from "../components/Navbar.vue";
 import Post from "../components/Post.vue";
 
 const postStore = usePostsStore();
@@ -29,7 +22,7 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.navbar {
-  margin-bottom: 5rem;
-}
+  div{
+    padding-top: 3rem;
+  }
 </style>

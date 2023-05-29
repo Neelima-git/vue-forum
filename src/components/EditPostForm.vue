@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { usePostsStore } from "../store/posts";
-import { RouterLink, useRoute } from "vue-router";
+import { useRoute } from "vue-router";
 import { storeToRefs } from "pinia";
 
 const postStore = usePostsStore();
@@ -14,19 +14,18 @@ const post = posts.value.find(p => p.id === postId)
 
 const title = ref(post.title);
 const body = ref(post.body);
-const userid = ref(post.userId);
+const userId = ref(post.userId);
 const tags = ref(post.tags);
 const reactions = ref(post.reactions);
 
 const editPost = () => {
-  updatePost(postId, title.value, body.value, userid.value, tags.value, reactions.value);
+  updatePost(postId, title.value, body.value, userId.value, tags.value, reactions.value);
 };
 </script>
 
 <template>
-
-  <div class="form container col-6">
-    <h3 class="text-secondary mb-4">Edit Post</h3>
+  <div class="form container col-6 custom-form ">
+    <h3 class="custom-title d-flex justify-content-center">Edit Post</h3>
     <form @submit.prevent >
     <div class="row">
         <div  class="mb-3">
@@ -50,12 +49,12 @@ const editPost = () => {
           />
         </div>
         <div  class="mb-3">
-          <label for="userid" class="form-label">User Id</label>
+          <label for="userId" class="form-label">User Id</label>
           <input
-            v-model="userid"
+            v-model="userId"
             type="number"
             class="form-control"
-            id="userid"
+            id="userId"
             placeholder="Add user Id, e.g 2"
           />
         </div>
@@ -80,16 +79,33 @@ const editPost = () => {
           />
         </div>
     </div>
-      <button type="submit" class="btn btn-primary" @click="editPost" >Edit</button>
+    <div class="d-flex justify-content-center">
+      <button type="submit" class="btn text-white custom-btn" @click="editPost" >Edit</button>
+    </div>
     </form>
     <br />
-
-    <RouterLink to="/">View posts</RouterLink>
   </div>
 </template>
 
 <style scoped>
-.form {
-  margin-top: 6rem;
+.custom-form{
+    background: rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+}
+
+.custom-title{
+    color: #625ca0;
+    padding-bottom: 1.5rem;
+}
+.custom-btn{
+    background-color: #837dc7;
+}
+.custom-btn:hover{
+    background-color: #645da9; 
 }
 </style>

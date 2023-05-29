@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from "vue";
 import { usePostsStore } from "../store/posts";
-import { RouterLink } from "vue-router";
 
 const postStore = usePostsStore();
 const { addPost } = postStore;
@@ -14,23 +13,15 @@ const tags = ref("");
 const reactions = ref();
 
 const addAPost = () => {
-  console.log("addAPost method called");
-  console.log(
-    postId.value,
-    title.value,
-    body.value,
-    userId.value,
-    tags.value,
-    reactions.value
-  );
-  addPost(postId.value ,title.value, body.value, userid.value, tags.value, reactions.value);
+  console.log(postId.value ,title.value, body.value, userId.value, tags.value, reactions.value);
+  addPost(postId.value ,title.value, body.value, userId.value, tags.value, reactions.value);
 };
 </script>
 
 <template>
 
-  <div class="form container col-6">
-    <h3 class="text-secondary mb-4">Add Post</h3>
+  <div class="form container col-6 custom-form ">
+    <h3 class="mb-4 custom-title d-flex justify-content-center ">Add Post</h3>
     <form @submit.prevent >
     <div class="row">
         <div  class="mb-3">
@@ -84,16 +75,36 @@ const addAPost = () => {
           />
         </div>
     </div>
-      <button type="submit" class="btn btn-primary" @click="addAPost" >Add post</button>
+    <div class="d-flex justify-content-center">
+      <button type="submit" class="btn text-white custom-btn " @click="addAPost" >Add post</button>
+    </div>
     </form>
     <br />
-
-    <RouterLink to="/">View posts</RouterLink>
   </div>
 </template>
 
 <style scoped>
-.form {
-  margin-top: 6rem;
+.custom-form{
+    background: rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+}
+
+.custom-title{
+    color: #625ca0;
+    padding-bottom: 1.5rem;
+}
+.custom-title{
+    color: #625ca0;
+}
+.custom-btn{
+    background-color: #837dc7;
+}
+.custom-btn:hover{
+    background-color: #645da9; 
 }
 </style>

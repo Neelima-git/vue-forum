@@ -1,22 +1,3 @@
-// import axios from "axios";
-// import { defineStore } from "pinia";
-// import { reactive, ref } from "vue";
-// const apiUrl = "https://dummyjson.com/posts";
-
-// export const usePostsStore = defineStore("post", () => {
-//     const post = reactive({});
-
-//     const getPosts = async () => {
-//         try {
-//             const res = await axios.get(`${apiUrl}`);
-//             return console.log(res.data);
-//         } catch (error) {
-//             return console.log(error);
-//         }
-//     }
-
-// })
-
 import { defineStore } from 'pinia'
 
 export const usePostsStore = defineStore('filteredPosts', {
@@ -35,7 +16,8 @@ export const usePostsStore = defineStore('filteredPosts', {
       this.filteredPosts = this.filteredPosts.filter((obj) => obj.id !== postId);
     },
     addPost(postId, title, body, userId, tags, reactions){
-      if(!userId.length || !title.length || postId.length)
+      console.log(title, body, userId, tags, reactions);
+      if(!userId.length || !title.length || postId.length) return
       // console.log(title, body, userId, tags, reactions);
       this.posts.push({
         id: postId,
@@ -45,8 +27,8 @@ export const usePostsStore = defineStore('filteredPosts', {
         tags,
         reactions
       })
-      // const checkAddedPost = this.posts.filter((obj) => obj.id == postId);
-      // console.log(checkAddedPost);
+      // const checkAddedPost = this.posts.find((obj) => obj.id == postId);
+      // console.log( "addedd post" ,checkAddedPost);
     },
     updatePost(postId, title, body, userId, tags, reactions) {
       const postIndex = this.posts.findIndex(post => post.id === postId);
@@ -63,6 +45,8 @@ export const usePostsStore = defineStore('filteredPosts', {
         };
 
         this.posts.splice(postIndex, 1, updatedPost);
+        const checkUpdatedPost = this.posts.find((obj) => obj.id == postId);
+        console.log(checkUpdatedPost);
       }
     }
   }
