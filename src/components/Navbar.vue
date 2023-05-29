@@ -10,15 +10,17 @@
           aria-label="Search"
           v-model.trim="searchQuery"
         />
-        <button class="btn btn-danger text-red" @click="deleteCheckedPosts">
+        <button class="btn btn-danger me-2" @click="deleteCheckedPosts">
           Delete
         </button>
+        <button class="btn btn-success"><RouterLink class="text-white text-decoration-none" to="/addpost">Add</RouterLink></button>
       </div>
     </div>
   </nav>
 </template>
 
 <script setup>
+import {RouterLink} from "vue-router"
 import { ref, watch } from "vue";
 import { usePostsStore } from "../store/posts";
 import { storeToRefs } from "pinia";

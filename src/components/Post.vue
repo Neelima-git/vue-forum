@@ -11,27 +11,42 @@
           {{ post.body }}
         </p>
         <!-- Footer -->
-        <div class="d-flex align-items-center">
-          <button
-            class="btn btn-outline-secondary me-2"
-            style="
-              --bs-btn-padding-y: 0.25rem;
-              --bs-btn-padding-x: 0.5rem;
-              --bs-btn-font-size: 0.75rem;
-            "
-          >
-            <font-awesome-icon icon="fa-solid fa-thumbs-up" class="ml-2" />
-            <span>{{ post.reactions }}</span>
-          </button>
-          <div v-for="tag in post.tags" :key="tag.id">
-            <a href="#" class="card-link me-2">#{{ tag }}</a>
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center">
+            <button
+              class="btn btn-outline-secondary me-2"
+              style="
+                --bs-btn-padding-y: 0.25rem;
+                --bs-btn-padding-x: 0.5rem;
+                --bs-btn-font-size: 0.75rem;
+              "
+            >
+              <font-awesome-icon icon="fa-solid fa-thumbs-up" class="ml-2" />
+              <span>{{ post.reactions }}</span>
+            </button>
+            <div>
+              <a
+                v-for="tag in post.tags"
+                :key="tag.id"
+                href="#"
+                class="card-link"
+              >
+                #{{ tag }}
+              </a>
+            </div>
           </div>
-          <input
-            class="form-check-input ms-auto"
-            type="checkbox"
-            :value="{ toDelIds: post.id }"
-            v-model="checked"
-          />
+          <div>
+            <RouterLink :to="`/editpost/${post.id}`">
+              <font-awesome-icon icon="fa-solid fa-edit" class="me-2" />
+            </RouterLink>
+
+            <input
+              class="form-check-input"
+              type="checkbox"
+              :value="{ toDelIds: post.id }"
+              v-model="checked"
+            />
+          </div>
         </div>
       </div>
     </div>

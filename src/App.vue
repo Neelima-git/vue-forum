@@ -1,10 +1,10 @@
 <script setup>
-  import PostsView from "./views/PostsView.vue"
+  import {RouterView} from "vue-router"
 </script>
 
 <template>
   <div>
-    <PostsView/>
+    <RouterView/>
   </div>
 </template>
 
