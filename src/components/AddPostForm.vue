@@ -13,13 +13,12 @@ const tags = ref("");
 const reactions = ref();
 
 const addAPost = () => {
-  console.log(postId.value ,title.value, body.value, userId.value, tags.value, reactions.value);
+  // console.log(postId.value ,title.value, body.value, userId.value, tags.value, reactions.value);
   addPost(postId.value ,title.value, body.value, userId.value, tags.value, reactions.value);
 };
 </script>
 
 <template>
-
   <div class="form container col-6 custom-form ">
     <h3 class="mb-4 custom-title d-flex justify-content-center ">Add Post</h3>
     <form @submit.prevent >

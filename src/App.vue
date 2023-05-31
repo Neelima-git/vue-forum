@@ -1,6 +1,20 @@
 <script setup>
 import { RouterView } from "vue-router";
 import Navbar from "./components/Navbar.vue";
+
+import { onMounted } from "vue";
+import { storeToRefs } from "pinia";
+
+import { usePostsStore } from "./store/posts";
+
+const postStore = usePostsStore();
+const { filteredPosts, newPosts } = storeToRefs(postStore);
+console.log(newPosts);
+
+onMounted(async () => {
+  await postStore.getPosts();
+  filteredPosts.value = postStore.posts ;
+});
 </script>
 
 <template>
