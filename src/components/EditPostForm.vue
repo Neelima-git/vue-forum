@@ -17,9 +17,11 @@ const body = ref(post.body);
 const userId = ref(post.userId);
 const tags = ref(post.tags);
 const reactions = ref(post.reactions);
+const postEditedMessage = ref(false)
 
 const editPost = () => {
   updatePost(postId, title.value, body.value, userId.value, tags.value, reactions.value);
+  postEditedMessage.value = true;
 };
 </script>
 
@@ -65,7 +67,7 @@ const editPost = () => {
             type="text"
             class="form-control"
             id="tags"
-            placeholder="Add tags"
+            placeholder="Add tags seperated by comma"
           />
         </div>
         <div  class="mb-3">
@@ -83,7 +85,7 @@ const editPost = () => {
       <button type="submit" class="btn text-white custom-btn" @click="editPost" >Edit</button>
     </div>
     </form>
-    <br />
+    <div v-if="postEditedMessage"><p class="msg d-flex justify-content-center pt-3">Post edited successfully!</p></div>
   </div>
 </template>
 
@@ -107,5 +109,8 @@ const editPost = () => {
 }
 .custom-btn:hover{
     background-color: #645da9; 
+}
+.msg{
+  color: #625ca0;
 }
 </style>

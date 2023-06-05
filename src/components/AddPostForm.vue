@@ -11,9 +11,11 @@ const body = ref("");
 const userId = ref();
 const tags = ref("");
 const reactions = ref();
+const postAddedMessage = ref(false);
 
 const addAPost = () => {
   // console.log(postId.value ,title.value, body.value, userId.value, tags.value, reactions.value);
+  postAddedMessage.value = true;
   addPost(postId.value ,title.value, body.value, userId.value, tags.value, reactions.value);
 };
 </script>
@@ -60,7 +62,7 @@ const addAPost = () => {
             type="text"
             class="form-control"
             id="tags"
-            placeholder="Add tags"
+            placeholder="Add tags seperated by comma"
           />
         </div>
         <div  class="mb-3">
@@ -78,6 +80,7 @@ const addAPost = () => {
       <button type="submit" class="btn text-white custom-btn " @click="addAPost" >Add post</button>
     </div>
     </form>
+    <div v-if="postAddedMessage"><p class="msg d-flex justify-content-center pt-3">New post added!!</p></div>
     <br />
   </div>
 </template>
@@ -105,5 +108,8 @@ const addAPost = () => {
 }
 .custom-btn:hover{
     background-color: #645da9; 
+}
+.msg{
+  color: #625ca0;
 }
 </style>

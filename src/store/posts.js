@@ -5,7 +5,6 @@ export const usePostsStore = defineStore("filteredPosts", {
     posts: [],
     filteredPosts: [],
     checked: [],
-    newPosts: []
   }),
   actions: {
     async getPosts() {
@@ -20,7 +19,6 @@ export const usePostsStore = defineStore("filteredPosts", {
       );
     },
     addPost(postId, title, body, userId, tags, reactions) {
-      // console.log(title, body, userId, tags, reactions);
       // Add validation checks
       if (!title || !postId || !userId) {
         console.log(
@@ -28,36 +26,42 @@ export const usePostsStore = defineStore("filteredPosts", {
         );
         return;
       }
-      console.log(title, body, userId, tags, reactions);
-      this.newPosts.push({
+
+      const tagsArray = tags.split(",").map((tag) => tag.trim()); // Split the tags string and trim whitespace
+      console.log(title, body, userId, tagsArray, reactions);
+      this.posts.push({
         id: postId,
         title,
         body,
         userId,
-        tags,
+        tags: tagsArray,
         reactions,
       });
       // const checkAddedPost = this.posts.find((obj) => obj.id == postId);
       // console.log( "addedd post" ,checkAddedPost);
-      console.log(this.newPosts);
+      console.log(this.posts);
     },
+
     updatePost(postId, title, body, userId, tags, reactions) {
       const postIndex = this.posts.findIndex((post) => post.id === postId);
-      console.log(postId);
-      console.log(postIndex);
+      // console.log(postId);
+      // console.log(postIndex);
       if (postIndex !== -1) {
+
+        const tagsArray = tags.split(",").map((tag) => tag.trim()); // Split the tags string and trim whitespace
+
         const updatedPost = {
           ...this.posts[postIndex],
           title,
           body,
           userId,
-          tags,
+          tags: tagsArray,
           reactions,
         };
 
         this.posts.splice(postIndex, 1, updatedPost);
-        const checkUpdatedPost = this.posts.find((obj) => obj.id == postId);
-        console.log("Updated post",checkUpdatedPost);
+        // const checkUpdatedPost = this.posts.find((obj) => obj.id == postId);
+        // console.log("Updated post",checkUpdatedPost);
       }
     },
   },

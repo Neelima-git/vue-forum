@@ -8,8 +8,7 @@ import { storeToRefs } from "pinia";
 import { usePostsStore } from "./store/posts";
 
 const postStore = usePostsStore();
-const { filteredPosts, newPosts } = storeToRefs(postStore);
-console.log(newPosts);
+const { filteredPosts } = storeToRefs(postStore);
 
 onMounted(async () => {
   await postStore.getPosts();
