@@ -20,7 +20,8 @@ const reactions = ref(post.reactions);
 const postEditedMessage = ref(false)
 
 const editPost = () => {
-  updatePost(postId, title.value, body.value, userId.value, tags.value, reactions.value);
+  console.log("editPost called", tags.value);
+  updatePost(postId, title.value, body.value, userId.value, tags.value.toString(), reactions.value);
   postEditedMessage.value = true;
 };
 </script>

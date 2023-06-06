@@ -28,8 +28,8 @@ import { storeToRefs } from "pinia";
 const searchQuery = ref("");
 const postStore = usePostsStore();
 
-const { deletePosts } = postStore;
-const { checked, filteredPosts } = storeToRefs(postStore);
+const { deletePosts, setSearchQuery } = postStore;
+const { checked} = storeToRefs(postStore);
 
 const deleteCheckedPosts = () => {
   checked.value.forEach((item) => {
@@ -39,23 +39,13 @@ const deleteCheckedPosts = () => {
   });
 
   // Clear the checked array after deleting the posts
-  postStore.checked = [];
+  checked = [];
 };
 
 watch(searchQuery, () => {
-  if (!searchQuery.value) {
-    filteredPosts.value = postStore.posts;
-    return;
-  }
-
-  const searchValue = searchQuery.value.toLowerCase();
-
-  filteredPosts.value = postStore.filteredPosts.filter(
-    (post) =>
-      post.title.toLowerCase().includes(searchValue) ||
-      post.tags.some((tag) => tag.toLowerCase().includes(searchValue))
-  );
+  setSearchQuery(searchQuery.value);
 });
+
 </script>
 
 <style scoped>

@@ -5,7 +5,23 @@ export const usePostsStore = defineStore("filteredPosts", {
     posts: [],
     filteredPosts: [],
     checked: [],
+    searchQuery: "",
   }),
+  getters: {
+    filteredPosts() {
+      if (this.searchQuery === "") {
+        return this.posts;
+      }
+
+      const searchValue = this.searchQuery.toLowerCase();
+
+      return this.posts.filter(
+        (post) =>
+          post.title.toLowerCase().includes(searchValue) ||
+          post.tags.some((tag) => tag.toLowerCase().includes(searchValue))
+      );
+    },
+  },
   actions: {
     async getPosts() {
       const result = await fetch("https://dummyjson.com/posts");
@@ -14,7 +30,7 @@ export const usePostsStore = defineStore("filteredPosts", {
       localStorage.setItem("posts", JSON.stringify(this.posts));
     },
     deletePosts(postId) {
-      this.filteredPosts = this.filteredPosts.filter(
+      this.posts = this.posts.filter(
         (obj) => obj.id !== postId
       );
     },
@@ -43,6 +59,7 @@ export const usePostsStore = defineStore("filteredPosts", {
     },
 
     updatePost(postId, title, body, userId, tags, reactions) {
+      console.log( "tags", tags);
       const postIndex = this.posts.findIndex((post) => post.id === postId);
       // console.log(postId);
       // console.log(postIndex);
@@ -63,6 +80,9 @@ export const usePostsStore = defineStore("filteredPosts", {
         // const checkUpdatedPost = this.posts.find((obj) => obj.id == postId);
         // console.log("Updated post",checkUpdatedPost);
       }
+    },
+    setSearchQuery(query) {
+      this.searchQuery = query;
     },
   },
 });
