@@ -39,7 +39,7 @@ const deleteCheckedPosts = () => {
   });
 
   // Clear the checked array after deleting the posts
-  checked = [];
+  checked.value = [];
 };
 
 watch(searchQuery, () => {
